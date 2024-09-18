@@ -10,6 +10,7 @@ const CommonForm = ({
   isLogin,
   handleCheckboxChange,
   selectedGender,
+  disabledBtn,
 }) => {
   const renderInputsByComponentType = (getControlItem) => {
     let element = null;
@@ -139,11 +140,16 @@ const CommonForm = ({
           <div>
             <button
               type="submit"
+              disabled={disabledBtn}
               className={`btn btn-block btn-sm mt-2 ${
                 !isLogin ? "border  border-slate-700" : ""
               }`}
             >
-              {buttonText || "Submit"}
+              {disabledBtn ? (
+                <span className="loading loading-spinner"></span>
+              ) : (
+                buttonText || "Submit"
+              )}
             </button>
           </div>
         </form>

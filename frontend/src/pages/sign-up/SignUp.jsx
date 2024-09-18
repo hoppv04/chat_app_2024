@@ -36,6 +36,7 @@ const SignUp = () => {
       handleSubmit={handleSubmit}
       handleCheckboxChange={handleCheckboxChange}
       selectedGender={formData.gender}
+      disabledBtn={loading}
     />
   );
 };
