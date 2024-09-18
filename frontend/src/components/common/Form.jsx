@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const CommonForm = ({
   formControls,
   formData,
@@ -6,6 +8,8 @@ const CommonForm = ({
   handleSubmit,
   buttonText,
   isLogin,
+  handleCheckboxChange,
+  selectedGender,
 }) => {
   const renderInputsByComponentType = (getControlItem) => {
     let element = null;
@@ -45,14 +49,24 @@ const CommonForm = ({
               ? checkboxOptions.map((checkboxItem) => (
                   <div className="form-control" key={checkboxItem.id}>
                     <label
-                      htmlFor={checkboxItem.name}
+                      htmlFor={checkboxItem.id}
                       className="label gap-2 cursor-pointer"
                     >
                       <span className="label-text">{checkboxItem.label}</span>
                       <input
                         type="checkbox"
-                        id={checkboxItem.name}
+                        id={checkboxItem.id}
                         className="checkbox border-base-content"
+                        checked={
+                          selectedGender
+                            ? selectedGender === checkboxItem.id
+                            : false
+                        }
+                        onChange={
+                          handleCheckboxChange
+                            ? () => handleCheckboxChange(checkboxItem.id)
+                            : null
+                        }
                       />
                     </label>
                   </div>
@@ -106,12 +120,21 @@ const CommonForm = ({
             </div>
           ))}
 
-          <a
-            href="#"
-            className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block"
-          >
-            {isLogin ? "Don't have an account" : "Already have an account?"}
-          </a>
+          {isLogin ? (
+            <Link
+              to="/sign-up"
+              className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block"
+            >
+              Don&apos;t have an account
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block"
+            >
+              Already have an account?
+            </Link>
+          )}
 
           <div>
             <button
